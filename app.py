@@ -14,9 +14,9 @@ import networkx as nx
 
 # Define global variables with default values
 BASE_URL = "https://www.ecfr.gov"
-request_timeout = 120  # Default value
-skip_problematic_titles = False  # Default value
-throttle_delay = 0.3  # Default value
+request_timeout = 240  # Default value
+skip_problematic_titles = True  # Default value
+throttle_delay = 0.2  # Default value
 cache_results=True
 
 # Set page config
@@ -327,12 +327,12 @@ def main():
     with st.sidebar.expander("Advanced Options"):
         cache_results = st.checkbox("Cache results", value=True, 
                                    help="Store results to avoid reprocessing if parameters don't change")
-        throttle_delay = st.slider("API request delay (seconds)", 0.1, 2.0, 0.3, 0.1,
+        throttle_delay = st.slider("API request delay (seconds)", 0.1, 2.0, 0.2, 0.1,
                                   help="Increase to avoid API rate limiting")
-        request_timeout = st.slider("Request timeout (seconds)", 30, 600, 120, 30,
+        request_timeout = st.slider("Request timeout (seconds)", 30, 600, 240, 30,
                                    help="Maximum time to wait for API response before timing out (helps with 504 errors)")
-        skip_problematic_titles = st.checkbox("Skip known large titles", value=False,
-                                            help="Skip titles known to cause timeouts (7, 10, 40, 42, 45)")
+        skip_problematic_titles = st.checkbox("Skip known large titles", value=True,
+                                            help="Skip titles known to cause timeouts (7, 12, 20, 21, 31, 40, 42, 46, 47, 48, 49, 50)")
     
     # Analytics tabs
     tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs(["Agency Analysis", "Title Analysis", "Agency Hierarchy", "Word Count Over Time", "Regulatory Composition",'About'])
